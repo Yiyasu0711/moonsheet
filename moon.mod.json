@@ -1,0 +1,7 @@
+{
+  "module": "moonsheet",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "description": "A spreadsheet calculation engine for MoonBit",
+  "source": "src"
+}
