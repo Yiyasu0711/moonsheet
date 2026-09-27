@@ -1,0 +1,15 @@
+target/
+.moonbit/
+*.exe
+*.dll
+*.so
+*.dylib
+*.pdb
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.log
