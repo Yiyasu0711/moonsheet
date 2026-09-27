@@ -129,6 +129,68 @@ pub fn dispatch(name : String, args : Array[@value.Value]) -> @value.Value {
     "AVEDEV" => fn_avedev(args)
     "DEVSQ" => fn_devsq(args)
 
+    // Lookup & reference functions
+    "VLOOKUP" => fn_vlookup(args)
+    "HLOOKUP" => fn_hlookup(args)
+    "INDEX" => fn_index(args)
+    "MATCH" => fn_match(args)
+    "CHOOSE" => fn_choose(args)
+    "ADDRESS" => fn_address(args)
+    "INDIRECT" => fn_indirect(args)
+    "ROW" => fn_row(args)
+    "COLUMN" => fn_column(args)
+    "ROWS" => fn_rows(args)
+    "COLUMNS" => fn_columns(args)
+    "TRANSPOSE" => fn_transpose(args)
+    "OFFSET" => fn_offset(args)
+    "XLOOKUP" => fn_xlookup(args)
+    "XMATCH" => fn_xmatch(args)
+    "LOOKUP" => fn_lookup(args)
+    "AREAS" => fn_areas(args)
+    "FORMULATEXT" => fn_formulatext(args)
+
+    // Financial functions
+    "PV" => fn_pv(args)
+    "FV" => fn_fv(args)
+    "PMT" => fn_pmt(args)
+    "NPER" => fn_nper(args)
+    "RATE" => fn_rate(args)
+    "NPV" => fn_npv(args)
+    "IRR" => fn_irr(args)
+    "IPMT" => fn_ipmt(args)
+    "PPMT" => fn_ppmt(args)
+    "EFFECT" => fn_effect(args)
+    "NOMINAL" => fn_nominal(args)
+    "SLN" => fn_sln(args)
+    "SYD" => fn_syd(args)
+    "DDB" => fn_ddb(args)
+    "FVSCHEDULE" => fn_fvschedule(args)
+    "MIRR" => fn_mirr(args)
+
+    // Array & dynamic array functions
+    "SORT" => fn_sort(args)
+    "UNIQUE" => fn_unique(args)
+    "FILTER" => fn_filter(args)
+    "TEXTJOIN" => fn_textjoin(args)
+    "SEQUENCE" => fn_sequence(args)
+    "RANDARRAY" => fn_randarray(args)
+    "ARRAYTOTEXT" => fn_arraytotext(args)
+    "VALUETOTEXT" => fn_valuetotext(args)
+    "TOROW" => fn_torow(args)
+    "TOCOL" => fn_tocol(args)
+    "WRAPROWS" => fn_wraprows(args)
+    "WRAPCOLS" => fn_wrapcols(args)
+    "TAKE" => fn_take(args)
+    "DROP" => fn_drop(args)
+    "CHOOSEROWS" => fn_chooserows(args)
+    "CHOOSECOLS" => fn_choosecols(args)
+    "EXPAND" => fn_expand(args)
+    "HSTACK" => fn_hstack(args)
+    "VSTACK" => fn_vstack(args)
+    "SORTBY" => fn_sortby(args)
+    "FREQUENCY" => fn_frequency(args)
+    "MMULT" => fn_mmult(args)
+
     _ => @value.Err(@error.NameError)
   }
 }
@@ -145,7 +207,7 @@ pub fn has_function(name : String) -> Bool {
 
 /// Get the count of available functions
 pub fn function_count() -> Int {
-  95
+  151
 }
 
 /// List all function names
@@ -165,7 +227,10 @@ pub fn list_functions() -> Array[String] {
     "WEEKDAY", "EOMONTH", "DATEDIF", "DAYS360", "WEEKNUM", "DATEVALUE", "TIMEVALUE",
     "AVERAGE", "COUNT", "COUNTA", "COUNTIF", "AVERAGEIF", "MEDIAN", "MODE",
     "STDEV", "STDEVP", "VAR", "VARP", "LARGE", "SMALL", "RANK", "PERCENTILE", "QUARTILE",
-    "SUMPRODUCT", "GEOMEAN", "HARMEAN", "AVEDEV", "DEVSQ"
+    "SUMPRODUCT", "GEOMEAN", "HARMEAN", "AVEDEV", "DEVSQ",
+    "VLOOKUP", "HLOOKUP", "INDEX", "MATCH", "CHOOSE", "ADDRESS",
+    "INDIRECT", "ROW", "COLUMN", "ROWS", "COLUMNS", "TRANSPOSE",
+    "OFFSET", "XLOOKUP", "XMATCH", "LOOKUP", "AREAS", "FORMULATEXT"
   ]
 }
 
@@ -177,10 +242,12 @@ pub fn function_category(name : String) -> String {
   let logical_funcs = ["IF", "AND", "OR", "NOT", "XOR", "IFERROR", "IFNA", "TRUE", "FALSE", "ISNUMBER", "ISTEXT", "ISLOGICAL", "ISERROR", "ISEMPTY", "ISNONTEXT", "ISREF", "NA", "ERROR.TYPE", "IFS", "SWITCH"]
   let date_funcs = ["DATE", "TODAY", "NOW", "TIME", "YEAR", "MONTH", "DAY", "HOUR", "MINUTE", "SECOND", "WEEKDAY", "EOMONTH", "DATEDIF", "DAYS360", "WEEKNUM", "DATEVALUE", "TIMEVALUE"]
   let stat_funcs = ["AVERAGE", "COUNT", "COUNTA", "COUNTIF", "AVERAGEIF", "MEDIAN", "MODE", "STDEV", "STDEVP", "VAR", "VARP", "LARGE", "SMALL", "RANK", "PERCENTILE", "QUARTILE", "SUMPRODUCT", "GEOMEAN", "HARMEAN", "AVEDEV", "DEVSQ"]
+  let lookup_funcs = ["VLOOKUP", "HLOOKUP", "INDEX", "MATCH", "CHOOSE", "ADDRESS", "INDIRECT", "ROW", "COLUMN", "ROWS", "COLUMNS", "TRANSPOSE", "OFFSET", "XLOOKUP", "XMATCH", "LOOKUP", "AREAS", "FORMULATEXT"]
   if math_funcs.contains(upper_name) { "Math" }
   else if text_funcs.contains(upper_name) { "Text" }
   else if logical_funcs.contains(upper_name) { "Logical" }
   else if date_funcs.contains(upper_name) { "Date/Time" }
   else if stat_funcs.contains(upper_name) { "Statistical" }
+  else if lookup_funcs.contains(upper_name) { "Lookup" }
   else { "Unknown" }
 }
