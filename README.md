@@ -1,10 +1,28 @@
 # MoonSheet
 
-A full-featured spreadsheet calculation engine written in [MoonBit](https://www.moonbitlang.com/).
+A lightweight spreadsheet formula calculation engine written in [MoonBit](https://www.moonbitlang.com/), designed for server-side and embedded scenarios.
 
 ## Overview
 
-MoonSheet is a pure-MoonBit implementation of a spreadsheet calculation engine. It provides formula parsing, evaluation, dependency management, and a comprehensive set of built-in functions compatible with common spreadsheet conventions. The project includes 150+ functions across 7 categories, named ranges, conditional formatting, data validation, and I/O support.
+MoonSheet is a pure-MoonBit implementation of a spreadsheet calculation engine. It provides formula parsing, evaluation, dependency management, and a comprehensive set of built-in functions compatible with common spreadsheet conventions. The project includes 151 functions across 8 categories, named ranges, conditional formatting, data validation, and I/O support.
+
+## Relationship with mbtexcel
+
+mbtexcel (a port of Go's excelize library, available on [mooncakes.io](https://mooncakes.io/docs/bobzhang/mbtexcel)) is an XLSX file I/O library focused on reading/writing Excel files with full fidelity (styles, charts, pivot tables, etc.), with formula evaluation as an embedded feature.
+
+MoonSheet takes a different approach — it is a **standalone calculation engine** with no file format dependency. The two libraries are complementary:
+
+| Aspect | mbtexcel | MoonSheet |
+|--------|----------|-----------|
+| Core focus | XLSX file read/write (excelize port) | Lightweight formula calculation engine (original) |
+| Primary use | Excel file manipulation, report generation | Server-side computation, embedded evaluation, data processing |
+| File format dependency | Strong XLSX/OOXML dependency | No file format dependency, JSON/CSV native |
+| Architecture | File I/O centered, formula built-in | Engine independent, decoupled modules |
+| Dynamic array functions | Not explicitly supported | 22 dynamic array functions |
+| Best for | Desktop/client, file generation | Microservices, workflows, lightweight apps |
+| Size/dependencies | Large (full OOXML + styles + charts) | Lightweight (engine + basic I/O) |
+
+**They can be used together**: use mbtexcel to read/write XLSX files, and MoonSheet for high-performance server-side batch computation.
 
 ## Features
 
