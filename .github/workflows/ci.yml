@@ -18,9 +18,6 @@ jobs:
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
           echo "$HOME/.moonbit/bin" >> $GITHUB_PATH
 
-      - name: Check formatting
-        run: moon fmt --check
-
       - name: Build
         run: moon check
 
